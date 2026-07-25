@@ -22,10 +22,10 @@ app.use("/api/orders", orderRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Storefront (public site)
-app.use("/", express.static(path.join(__dirname, "..", "public")));
+app.use("/", express.static(path.join(__dirname, "public")));
 
 // Admin dashboard
-app.use("/admin", express.static(path.join(__dirname, "..", "admin")));
+app.use("/admin", express.static(path.join(__dirname, "admin")));
 
 app.use((err, req, res, next) => {
   console.error(err);
