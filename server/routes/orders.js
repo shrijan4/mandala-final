@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require("../db");
 const { requireAdmin } = require("../middleware/auth");
+const { sendNewOrderEmails, sendStatusUpdateEmails } = require("../utils/mailer");
 
 const router = express.Router();
 
@@ -60,6 +61,15 @@ router.post("/", (req, res) => {
 
   const orderId = tx();
   res.status(201).json({ orderNumber, orderId, subtotal, shipping, total, items: lineItems });
+
+  sendNewOrderEmails({
+    order_number: orderNumber,
+    first_name: b.firstName,
+    last_name: b.lastName,
+    email: b.email,
+    total,
+    items: lineItems
+  }).catch(err => console.error("New order email error:", err));
 });
 
 // ---------------- Admin ----------------
@@ -86,10 +96,12 @@ router.patch("/:id/status", requireAdmin, (req, res) => {
   if (!VALID_STATUSES.includes(status)) {
     return res.status(400).json({ error: `status must be one of: ${VALID_STATUSES.join(", ")}` });
   }
-  const existing = db.prepare("SELECT id FROM orders WHERE id = ?").get(req.params.id);
+  const existing = db.prepare("SELECT * FROM orders WHERE id = ?").get(req.params.id);
   if (!existing) return res.status(404).json({ error: "Order not found" });
   db.prepare("UPDATE orders SET status = ? WHERE id = ?").run(status, req.params.id);
   res.json({ ok: true });
+
+  sendStatusUpdateEmails(existing, status).catch(err => console.error("Status email error:", err));
 });
 
 module.exports = router;
