@@ -19,15 +19,18 @@ async function sendMail(to, subject, html) {
     console.warn("RESEND_API_KEY not set — email skipped");
     return;
   }
-  try {
-    await resend.emails.send({
-      from: "Mandala Orders <onboarding@resend.dev>",
-      to,
-      subject,
-      html
-    });
-  } catch (err) {
-    console.error("Email send failed:", err);
+  const recipients = Array.isArray(to) ? to : [to];
+  for (const recipient of recipients) {
+    try {
+      await resend.emails.send({
+        from: "Mandala Orders <onboarding@resend.dev>",
+        to: recipient,
+        subject,
+        html
+      });
+    } catch (err) {
+      console.error(`Email send failed for ${recipient}:`, err.message || err);
+    }
   }
 }
 
