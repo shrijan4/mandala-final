@@ -44,9 +44,9 @@ function productCardHTML(p) {
         <div class="thumb">
           ${badge}
           <img src="${img}" alt="${p.name}" loading="lazy">
+          <button class="quick-add" data-add="${p.id}" onclick="event.preventDefault()">Add to Cart</button>
         </div>
       </a>
-      <button class="quick-add" data-add="${p.id}">Add to Cart</button>
       <a href="product.html?id=${p.id}">
         <div class="p-cat">${p.categoryLabel}</div>
         <div class="p-name">${p.name}</div>
