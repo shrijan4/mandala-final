@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Mandala Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="mark"></span> Mandala</div>
+    <nav>
+      <a href="products.html" class="active">Products</a>
+      <a href="orders.html">Orders</a>
+    </nav>
+    <a href="/" target="_blank" class="view-site">View Storefront →</a>
+    <div style="font-size:0.78rem;color:#B8AE9E;margin-top:1rem;" data-admin-email></div>
+    <button class="logout-btn" data-logout>Log Out</button>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <div>
+        <h1>Products</h1>
+        <p>Add, edit, or remove items from your catalog.</p>
+      </div>
+      <button class="btn btn-primary" id="add-product-btn">+ Add Product</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="product-rows">
+        <tr class="empty-row"><td colspan="6">Loading products...</td></tr>
+      </tbody>
+    </table>
+  </main>
+</div>
+
+<!-- Add / Edit Product Modal -->
+<div class="modal-overlay" id="product-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modal-title">Add Product</h2>
+      <button id="modal-close">&times;</button>
+    </div>
+    <form id="product-form">
+      <input type="hidden" name="id" id="f-id">
+      <div class="form-grid-2">
+        <div class="field full">
+          <label>Product Name</label>
+          <input type="text" name="name" required>
+        </div>
+        <div class="field">
+          <label>Category</label>
+          <select name="category" required>
+            <option value="singing-bowls">Singing Bowls & Spiritual Items</option>
+            <option value="wood-metal">Wood & Metal Decor</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Badge (optional)</label>
+          <select name="badge">
+            <option value="">None</option>
+            <option value="New">New</option>
+            <option value="Bestseller">Bestseller</option>
+            <option value="Gift Set">Gift Set</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Price (USD)</label>
+          <input type="number" name="price" step="0.01" min="0" required>
+        </div>
+        <div class="field">
+          <label>Compare-at Price (optional)</label>
+          <input type="number" name="compareAt" step="0.01" min="0">
+        </div>
+        <div class="field full">
+          <label>Description</label>
+          <textarea name="description" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Origin</label>
+          <input type="text" name="origin" placeholder="e.g. Patan, Nepal">
+        </div>
+        <div class="field">
+          <label>Material</label>
+          <input type="text" name="material" placeholder="e.g. Cast brass">
+        </div>
+        <div class="field full">
+          <label>Dimensions</label>
+          <input type="text" name="dimensions" placeholder="e.g. 6&quot; height">
+        </div>
+        <div class="field full">
+          <label>Images</label>
+          <div class="image-manager" id="image-manager"></div>
+          <label class="upload-drop" id="upload-drop">
+            Click to upload an image (JPG, PNG, WEBP — up to 8MB)
+            <input type="file" id="image-input" accept="image/*" style="display:none;">
+          </label>
+        </div>
+        <div class="field full">
+          <label style="display:flex;align-items:center;gap:0.5rem;flex-direction:row;">
+            <input type="checkbox" name="active" style="width:auto;" checked> Visible on storefront
+          </label>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn" id="modal-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="save-btn">Save Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/products.js"></script>
+</body>
+</html>

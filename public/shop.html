@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop All — Mandala</title>
+<meta name="description" content="Shop authentic Nepali handicraft: singing bowls, spiritual items, and wood & metal decor, shipped direct from Nepal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="announce">Free shipping on orders over $120 · Shipped direct from Nepal</div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="mark"></span> Mandala</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop All</a>
+      <a href="shop.html?category=singing-bowls">Singing Bowls</a>
+      <a href="shop.html?category=wood-metal">Wood &amp; Metal</a>
+      <a href="about.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a href="cart.html" class="icon-btn" aria-label="Cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h2l2.4 12.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L22 9H6.6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+        <span class="cart-count" data-cart-count>0</span>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Shop</div>
+    <h1>Shop All Handicraft</h1>
+  </div>
+</div>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="shop-layout">
+      <aside>
+        <div class="filter-group">
+          <h5>Category</h5>
+          <a href="#" class="filter-option" data-filter="all">All Products</a><br>
+          <a href="#" class="filter-option" data-filter="singing-bowls">Singing Bowls &amp; Spiritual Items</a><br>
+          <a href="#" class="filter-option" data-filter="wood-metal">Wood &amp; Metal Decor</a>
+        </div>
+        <div class="filter-group">
+          <h5>Shipping</h5>
+          <div class="filter-option" style="cursor:default;">Ships direct from Nepal, 8–14 days</div>
+        </div>
+      </aside>
+      <div>
+        <div class="shop-toolbar">
+          <span data-result-count>12 products</span>
+          <select data-sort>
+            <option value="default">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+        <div class="product-grid" data-shop-grid></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="index.html" class="logo"><span class="mark"></span> Mandala</a>
+        <p style="margin-top:0.8rem;">Authentic Nepali handicraft, handmade by artisan families and shipped directly from Nepal.</p>
+      </div>
+      <div>
+        <h5>Shop</h5>
+        <ul>
+          <li><a href="shop.html">All Products</a></li>
+          <li><a href="shop.html?category=singing-bowls">Singing Bowls</a></li>
+          <li><a href="shop.html?category=wood-metal">Wood &amp; Metal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html">Shipping &amp; Returns</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Follow</h5>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Pinterest</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year></span> Mandala. All rights reserved.</span>
+      <span>Handcrafted in Nepal · Shipped Worldwide</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Preselect filter from URL, sync active class
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get("category") || "all";
+    document.querySelectorAll("[data-filter]").forEach(o => {
+      o.classList.toggle("active", o.getAttribute("data-filter") === cat);
+    });
+  });
+</script>
+</body>
+</html>
